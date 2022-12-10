@@ -1,7 +1,9 @@
 const std = @import("std");
 const clap = @import("clap");
 
-const ExerciseImplementation = struct { f: *const fn (filename: []const u8) anyerror!void };
+const ExerciseImplementation = struct {
+    f: *const fn (part: usize, filename: []const u8) anyerror!void
+};
 
 const exercises = [_]ExerciseImplementation{
     ExerciseImplementation{ .f = @import("ex1.zig").f },
@@ -9,8 +11,9 @@ const exercises = [_]ExerciseImplementation{
 
 pub fn main() anyerror!void {
     const params = comptime clap.parseParamsComptime(
-        \\-h, --help             Display this help and exit.
-        \\-d, --day <usize>     An option parameter, which takes a value.
+        \\-h, --help            Display this help and exit.
+        \\-d, --day <usize>     An option parameter, which takes the day.
+        \\-p, --part <usize>    An option parameter, which takes the part.
         \\<str>...
         \\
     );
@@ -34,9 +37,10 @@ pub fn main() anyerror!void {
     }
 
     const day = res.args.day orelse return error.DayMustBeProvided;
+    const part = res.args.part orelse return error.PartMustBeProvided;
 
     if (res.positionals.len > 1)
         return error.OnlyOnePositionalExpected;
 
-    try exercises[day-1].f(res.positionals[0]);
+    try exercises[day - 1].f(part, res.positionals[0]);
 }
