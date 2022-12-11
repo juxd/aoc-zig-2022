@@ -1,12 +1,11 @@
 const std = @import("std");
 const clap = @import("clap");
 
-const ExerciseImplementation = struct {
-    f: *const fn (part: usize, filename: []const u8) anyerror!void
-};
+const ExerciseImplementation = struct { f: *const fn (part: usize, filename: []const u8) anyerror!void };
 
 const exercises = [_]ExerciseImplementation{
     ExerciseImplementation{ .f = @import("ex1.zig").f },
+    ExerciseImplementation{ .f = @import("ex2.zig").f },
 };
 
 pub fn main() anyerror!void {
