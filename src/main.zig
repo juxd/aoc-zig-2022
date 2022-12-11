@@ -9,13 +9,15 @@ const exercises = [_]ExerciseImplementation{
 };
 
 pub fn main() anyerror!void {
-    const params = comptime clap.parseParamsComptime(
+    const helpString =
         \\-h, --help            Display this help and exit.
         \\-d, --day <usize>     An option parameter, which takes the day.
         \\-p, --part <usize>    An option parameter, which takes the part.
         \\<str>...
         \\
-    );
+    ;
+
+    const params = comptime clap.parseParamsComptime(helpString);
 
     // Initalize our diagnostics, which can be used for reporting useful errors.
     // This is optional. You can also pass `.{}` to `clap.parse` if you don't
@@ -31,7 +33,7 @@ pub fn main() anyerror!void {
     defer res.deinit();
 
     if (res.args.help) {
-        std.debug.print("--help\n", .{});
+        std.debug.print("{s}\n", .{ helpString });
         return;
     }
 
