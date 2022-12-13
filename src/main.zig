@@ -7,6 +7,7 @@ const exercises = [_]ExerciseImplementation{
     ExerciseImplementation{ .f = @import("ex1.zig").f },
     ExerciseImplementation{ .f = @import("ex2.zig").f },
     ExerciseImplementation{ .f = @import("ex3.zig").f },
+    ExerciseImplementation{ .f = @import("ex4.zig").f },
 };
 
 pub fn main() anyerror!void {
