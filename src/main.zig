@@ -6,6 +6,7 @@ const ExerciseImplementation = struct { f: *const fn (part: usize, filename: []c
 const exercises = [_]ExerciseImplementation{
     ExerciseImplementation{ .f = @import("ex1.zig").f },
     ExerciseImplementation{ .f = @import("ex2.zig").f },
+    ExerciseImplementation{ .f = @import("ex3.zig").f },
 };
 
 pub fn main() anyerror!void {
